@@ -78,13 +78,15 @@ def results_list(request):
         
         if form.is_valid():
             if form.cleaned_data['error'] == '':
-                form.cleaned_data['errror'] = None
-            Result.objects.get_or_create(form.cleaned_data)
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Utworzono nowy Result"
-            )
+                form.cleaned_data['error'] = None
+                
+            existing_results = Result.objects.filter(**form.cleaned_data)
+            
+            if existing_results.exists():
+                messages.error(request, "Już taki istnieje!")
+            else:
+                Result.objects.create(**form.cleaned_data)
+                messages.success(request, "Utworzono nowy Result")
         else:
             messages.add_message(
                 request,

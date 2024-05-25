@@ -1,0 +1,25 @@
+{% extends "maths/main.html" %}
+
+{% block title %}Author details{% endblock %}
+
+{% block content %}
+   <table>
+        <tr>
+            <th>ID:</th>
+            <td>{{ author.id }}</td>
+        </tr>
+       <tr>
+           <th>Nick:</th>
+           <td>{{ author.nick }}</td>
+       </tr>
+       <tr>
+           <th>Email:</th>
+           <td>{{ author.email }}</td>
+       </tr>
+       <tr>
+           <th>Bio:</th>
+           <td>{{ author.author_bio }}</td>
+       </tr>
+   </table>
+   <a href="{% url "posts:a_list" %}">back</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "maths/main.html" %}
+
+{% block title %}Posts list{% endblock %}
+
+{% block content %}
+   <ul>
+       {% for p in posts  %}
+           <li><a href="{% url "posts:details" p.id %}">{{ p.title }}</a></li>
+       {% endfor %}
+   </ul>
+{% endblock %}

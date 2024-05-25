@@ -20,3 +20,7 @@ class Author(models.Model):
     nick = models.CharField(max_length=50, unique=True, null=False)
     email = models.EmailField(null=False, unique=True)
     author_bio = models.TextField(blank=True)
+
+
+    def __str__(self):
+        return self.nick
