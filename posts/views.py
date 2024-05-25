@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from posts.models import Post, Author
 from posts.forms import PostForm, AuthorForm
 from django.contrib import messages
@@ -13,11 +13,12 @@ def posts_list(request):
         if form.is_valid():
             Post.objects.create(**form.cleaned_data)
             messages.success(request,'Dodano post')
+            return redirect(request.path)
         else:
             messages.error(request,'Cos poszlo nie tak')
     else:
         messages.error(request, 'Nie udalo sie dodac!')
-        
+
     form = PostForm()
     posts = Post.objects.all()
     return render(
@@ -47,6 +48,7 @@ def author_list(request):
             else:
                 Author.objects.create(**form.cleaned_data)
                 messages.success(request,'Dodano autora!')
+                return redirect(request.path)
         else:
             messages.error(request,'Nie udalo sie dodac autora')
 
