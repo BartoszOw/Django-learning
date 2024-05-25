@@ -1,8 +1,10 @@
 from django import forms
+from posts.models import Author
 
 class PostForm(forms.Form):
     title = forms.CharField(required=True)
     content = forms.CharField(widget=forms.Textarea, required=True)
+    author = forms.ModelChoiceField(queryset=Author.objects.all(), widget=forms.Select, required=True)
 
     def clean(self):
         cleaned_data = super().clean()

@@ -7,11 +7,23 @@ from django.contrib import messages
 
 
 def posts_list(request):
+
+    if request.method == "POST":
+        form = PostForm(data=request.POST)
+        if form.is_valid():
+            Post.objects.create(**form.cleaned_data)
+            messages.success(request,'Dodano post')
+        else:
+            messages.error(request,'Cos poszlo nie tak')
+    else:
+        messages.error(request, 'Nie udalo sie dodac!')
+        
+    form = PostForm()
     posts = Post.objects.all()
     return render(
         request=request,
         template_name='post_list.html',
-        context={'posts': posts}
+        context={'posts': posts, 'form': form}
     )
 
 def posts_details(request, id):
