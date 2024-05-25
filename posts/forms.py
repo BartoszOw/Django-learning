@@ -1,10 +1,10 @@
 from django import forms
-from posts.models import Author
+from posts.models import Author, Post
 
-class PostForm(forms.Form):
-    title = forms.CharField(required=True)
-    content = forms.CharField(widget=forms.Textarea, required=True)
-    author = forms.ModelChoiceField(queryset=Author.objects.all(), widget=forms.Select, required=True)
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = '__all__'
 
     def clean(self):
         cleaned_data = super().clean()
@@ -16,10 +16,10 @@ class PostForm(forms.Form):
         
         return cleaned_data
     
-class AuthorForm(forms.Form):
-    nick = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    author_bio = forms.CharField(widget=forms.Textarea, required=False)
+class AuthorForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = '__all__'
 
     def clean(self):
         cleaned_data = super().clean()

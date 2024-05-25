@@ -7,20 +7,19 @@ from django.contrib import messages
 
 
 def posts_list(request):
-
+    form = PostForm()
+    posts = Post.objects.all()
     if request.method == "POST":
         form = PostForm(data=request.POST)
         if form.is_valid():
-            Post.objects.create(**form.cleaned_data)
+            form.save()
             messages.success(request,'Dodano post')
             return redirect(request.path)
         else:
             messages.error(request,'Cos poszlo nie tak')
-    else:
-        messages.error(request, 'Nie udalo sie dodac!')
+    
 
-    form = PostForm()
-    posts = Post.objects.all()
+    
     return render(
         request=request,
         template_name='post_list.html',
@@ -46,7 +45,7 @@ def author_list(request):
             if ex_authors.exists():
                 messages.error(request,'Istnieje juz taki Autor!')
             else:
-                Author.objects.create(**form.cleaned_data)
+                form.save()
                 messages.success(request,'Dodano autora!')
                 return redirect(request.path)
         else:

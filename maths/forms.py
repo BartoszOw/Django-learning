@@ -1,8 +1,10 @@
 from django import forms
+from maths.models import Result
 
-class ResultForm(forms.Form):
-    value = forms.FloatField(required=False)
-    error = forms.CharField(required=False)
+class ResultForm(forms.ModelForm):
+    class Meta:
+        model = Result
+        fields = ['value', 'error']
 
     def clean(self):
         cleaned_data = super().clean()

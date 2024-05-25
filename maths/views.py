@@ -85,14 +85,12 @@ def results_list(request):
             if existing_results.exists():
                 messages.error(request, "Już taki istnieje!")
             else:
-                Result.objects.create(**form.cleaned_data)
+                form.save()
                 messages.success(request, "Utworzono nowy Result")
         else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                form.errors['__all__']
-            )
+            errors = form.non_field_errors()
+            for error in errors:
+                messages.error(request, error)
     form = ResultForm()
     results = Result.objects.all()
     return render(
