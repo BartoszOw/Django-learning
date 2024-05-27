@@ -1,0 +1,24 @@
+[
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "title": "First Post",
+        "content": "First John Black post",
+        "created": "2024-05-20T17:33:17.978Z",
+        "modified": "2024-05-20T17:33:17.978Z",
+        "author": 2
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "title": "Second Post",
+        "content": "Second post but, BEKA's first",
+        "created": "2024-05-20T17:34:16.387Z",
+        "modified": "2024-05-20T17:34:16.387Z",
+        "author": 1
+    }
+}
+]

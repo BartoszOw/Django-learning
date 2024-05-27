@@ -1,0 +1,20 @@
+[
+{
+    "model": "posts.author",
+    "pk": 1,
+    "fields": {
+        "nick": "BEKA",
+        "email": "dawda@gada.pl",
+        "author_bio": "DADAWD DAWDAWD ADW"
+    }
+},
+{
+    "model": "posts.author",
+    "pk": 2,
+    "fields": {
+        "nick": "John BLack",
+        "email": "dddda@gada.pl",
+        "author_bio": "xdxdxdxdx"
+    }
+}
+]
