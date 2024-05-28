@@ -15,6 +15,9 @@ class Post(models.Model):
         blank=False,
     )
 
+    def __str__(self):
+        return f"id:{self.id}, title:{self.title}, content:{self.content}, author:{self.author.id}"
+
 
 class Author(models.Model):
     nick = models.CharField(max_length=50, unique=True, null=False)
@@ -23,4 +26,4 @@ class Author(models.Model):
 
 
     def __str__(self):
-        return self.nick
+        return f'{self.nick}, {self.email}'

@@ -26,3 +26,19 @@ class PostFormTest(TestCase):
         self.assertEqual(p.author.id, 1)
         self.assertIsNotNone(p.id)
         
+
+class AuthorFormTest(TestCase):
+
+    def setUp(self):
+        self.author1 = Author.objects.create(nick="AD", email='dad@dad.pl')
+
+    def test_data_save_correct(self):
+        data = {'nick': 'da', 'email': 'dada@dad.pl'}
+        self.assertEqual(len(Author.objects.all()), 1)
+        form = AuthorForm(data=data)
+        self.assertTrue(form.is_valid())
+        a = form.save()
+        self.assertIsInstance(a, Author)
+        self.assertEqual(a.nick, 'da')
+        self.assertEqual(a.email, 'dada@dad.pl')
+        self.assertIsNotNone(a.id)
