@@ -29,3 +29,4 @@ class AuthorViewTest(TestCase):
         self.assertEqual(len(response.context['authors']), 1)
         expected_link = f'<li><a href="/posts/authors/{self.author.id}">{self.author.nick} {self.author.email}</a></li>'
         self.assertIn(expected_link, response.content.decode())
+

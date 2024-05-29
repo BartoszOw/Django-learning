@@ -3,10 +3,36 @@
 {% block title %}Maths list{% endblock %}
 
 {% block content %}
+<form action="" method="get">
+    <label for="operation">Search for Operation</label>
+    <select name="operation" id="operation">
+        <option value="">-- Select an Operation --</option>
+        {% for key, value in operations.items %}
+                <option value="{{ key }}" {% if operation == key %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Search</button>
+</form>
    <ul>
        {% for m in maths %}
-           {# <li><a href="/maths/histories/{{ m.id }}">{{ m }}</a></li> #}
            <li><a href="{% url "maths:details" m.id %}">{{ m }}</a></li>
        {% endfor %}
    </ul>
+   <div class="pagination">
+    <span class="step-links">
+        {% if maths.has_previous %}
+            <a href="?page=1">« first</a>
+            <a href="?page={{maths.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{maths.number}} of {{maths.paginator.num_pages}}
+        </span>
+
+        {% if maths.has_next %}
+            <a href="?page={{maths.next_page_number}}">Next</a>
+            <a href="?page={{maths.paginator.num_pages}}">Last »</a>
+        {% endif %}
+    </span>
+   </div>
 {% endblock %}

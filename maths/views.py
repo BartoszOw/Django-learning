@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.contrib import messages
+from django.core.paginator import Paginator
+
 from maths.models import Math, Result
 from maths.forms import ResultForm
 
@@ -57,11 +59,27 @@ def div(request, a, b):
     ))
 
 def maths_list(request):
-    maths = Math.objects.all()
+
+    SELECT_OP = {
+        'add': 'add',
+        'sub': 'sub',
+        'div': 'div',
+        'mul': 'mul'
+    }
+    
+    operation = request.GET.get('operation')
+    if operation in SELECT_OP:
+        maths = Math.objects.filter(operation=SELECT_OP[operation])
+    else:
+        maths = Math.objects.all()
+
+    paginator = Paginator(maths, 5)
+    page_number = request.GET.get('page')
+    maths = paginator.get_page(page_number)
     return render(
         request=request,
         template_name='maths/list.html',
-        context={'maths': maths}
+        context={'maths': maths, 'operation': operation, 'operations': SELECT_OP}
     )
 
 def math_details(request, id):
