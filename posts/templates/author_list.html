@@ -2,16 +2,52 @@
 
 {% block title %}Authors list{% endblock %}
 
-{% block content %}
-   <ul>
-       {% for a in authors  %}
-           <li><a href="{% url "posts:a_details" a.id %}">{{ a.nick }} {{ a.email }}</a></li>
-       {% endfor %}
-   </ul>
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item " >
+            <a href="{% url 'greetings:welcome'%}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" >
+            Authors
+        </li>
+    </ol>
+{% endblock breadcrumbs %}
 
-   <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Add">
-   </form>
+{% block content %}
+<div class="row">
+    <div class="col-md-5">
+        <h3>Authors</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in authors %}
+                        <tr>
+                            <td><a href="{% url 'posts:a_details' a.id %}">{{ a.nick }}</a></td>
+                            <td>{{ a.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <h3>Add a new Author</h3>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                {{ form.as_p }}
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      </div>
 {% endblock %}

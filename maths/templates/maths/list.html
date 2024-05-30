@@ -1,38 +1,69 @@
 {% extends "maths/main.html" %}
 
 {% block title %}Maths list{% endblock %}
-
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item " >
+            <a href="{% url 'greetings:welcome'%}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Maths
+        </li>
+    </ol>
+{% endblock %}
 {% block content %}
-<form action="" method="get">
-    <label for="operation">Search for Operation</label>
-    <select name="operation" id="operation">
-        <option value="">-- Select an Operation --</option>
-        {% for key, value in operations.items %}
-                <option value="{{ key }}" {% if operation == key %}selected{% endif %}>{{ value }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Search</button>
-</form>
-   <ul>
-       {% for m in maths %}
-           <li><a href="{% url "maths:details" m.id %}">{{ m }}</a></li>
-       {% endfor %}
-   </ul>
-   <div class="pagination">
-    <span class="step-links">
-        {% if maths.has_previous %}
-            <a href="?page=1">« first</a>
-            <a href="?page={{maths.previous_page_number }}">Previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{maths.number}} of {{maths.paginator.num_pages}}
-        </span>
-
-        {% if maths.has_next %}
-            <a href="?page={{maths.next_page_number}}">Next</a>
-            <a href="?page={{maths.paginator.num_pages}}">Last »</a>
-        {% endif %}
-    </span>
-   </div>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form action="" method="get" class="form-inline mb-3">
+            <div class="form-group mr-2">
+                <label for="operation" class="mr-2">Search for Operation</label>
+                <select name="operation" id="operation" class="form-control">
+                    <option value="">-- Select an Operation --</option>
+                    {% for key, value in operations.items %}
+                        <option value="{{ key }}" {% if operation == key %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <ul class="list-group mb-3">
+            {% for m in maths %}
+                <li class="list-group-item">
+                    <a href="{% url 'maths:details' m.id %}" class="text-decoration-none">{{ m }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <nav aria-label="Page navigation" class="d-flex justify-content-center">
+            <ul class="pagination">
+                {% if maths.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo; first</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ maths.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">Previous</span>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="page-item disabled">
+                    <span class="page-link">Page {{ maths.number }} of {{ maths.paginator.num_pages }}</span>
+                </li>
+                {% if maths.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ maths.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">Next</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ maths.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">Last &raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
 {% endblock %}

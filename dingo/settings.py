@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'maths',
     'greetings',
     'posts',
+    'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

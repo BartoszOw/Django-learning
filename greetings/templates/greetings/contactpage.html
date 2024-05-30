@@ -1,0 +1,32 @@
+{% extends "maths/main.html" %}
+
+{% block title %}Maths list{% endblock %}
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item " >
+            <a href="{% url 'greetings:welcome'%}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Contact
+        </li>
+    </ol>
+{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form action="">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Wyślij</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

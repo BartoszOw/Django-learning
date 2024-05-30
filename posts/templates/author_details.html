@@ -2,24 +2,44 @@
 
 {% block title %}Author details{% endblock %}
 
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item " >
+        <a href="{% url 'greetings:welcome'%}">Home</a>
+    </li>
+    <li class="breadcrumb-item " >
+        <a href="{% url 'posts:a_list'%}">Authors</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Details
+    </li>
+</ol>
+{% endblock breadcrumbs %}
+
 {% block content %}
-   <table>
-        <tr>
-            <th>ID:</th>
-            <td>{{ author.id }}</td>
-        </tr>
-       <tr>
-           <th>Nick:</th>
-           <td>{{ author.nick }}</td>
-       </tr>
-       <tr>
-           <th>Email:</th>
-           <td>{{ author.email }}</td>
-       </tr>
-       <tr>
-           <th>Bio:</th>
-           <td>{{ author.author_bio }}</td>
-       </tr>
-   </table>
-   <a href="{% url "posts:a_list" %}">back</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <td>{{ author.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nick</th>
+                    <td>{{ author.nick }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ author.email }}</td>
+                </tr>
+                <tr>
+                    <th>Bio</th>
+                    <td>{{ author.author_bio }}</td>
+                </tr>
+            </table>
+            <a href="{% url 'posts:a_list' %}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

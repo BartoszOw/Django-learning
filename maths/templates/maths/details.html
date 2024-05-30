@@ -2,28 +2,47 @@
 
 {% block title %}Maths list{% endblock %}
 
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item " >
+            <a href="{% url 'greetings:welcome'%}">Home</a>
+        </li>
+        <li class="breadcrumb-item " >
+            <a href="{% url 'maths:list'%}">Maths</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Details
+        </li>
+    </ol>
+{% endblock breadcrumbs %}
 {% block content %}
-   <table>
-       <tr>
-           <th>Operation</th>
-           <td>{{ math.operation }}</td>
-       </tr>
-       <tr>
-           <th>a</th>
-           <td>{{ math.a }}</td>
-       </tr>
-       <tr>
-           <th>b</th>
-           <td>{{ math.b }}</td>
-       </tr>
-       <tr>
-           <th>Created:</th>
-           <td>{{ math.created }}</td>
-       </tr>
-       <tr>
-           <th>Result</th>
-           <td>{{ math.result }}</td>
-       </tr>
-   </table>
-   <a href="{% url "maths:list" %}">back</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <tr>
+                    <th>Operation</th>
+                    <td>{{ math.operation }}</td>
+                </tr>
+                <tr>
+                    <th>a</th>
+                    <td>{{ math.a }}</td>
+                </tr>
+                <tr>
+                    <th>b</th>
+                    <td>{{ math.b }}</td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td>{{ math.created }}</td>
+                </tr>
+                <tr>
+                    <th>Result</th>
+                    <td>{{ math.result }}</td>
+                </tr>
+            </table>
+            <a href="{% url 'maths:list' %}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

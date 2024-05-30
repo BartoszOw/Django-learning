@@ -1,0 +1,25 @@
+{% extends "maths/main.html" %}
+
+{% block title %}Maths list{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item " >
+            <a href="{% url 'greetings:welcome'%}">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            About
+        </li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <ul class="list-group">
+        <li class="list-group-item">{{ info1 }}</li>
+        <li class="list-group-item">{{ info2 }}</li>
+        <li class="list-group-item">{{ info3 }}</li>
+        <li class="list-group-item">{{ info4 }}</li>
+        <li class="list-group-item">{{ info5 }}</li>
+    </ul>
+ 
+
+{% endblock %}
