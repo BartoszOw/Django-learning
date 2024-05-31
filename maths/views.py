@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from maths.models import Math, Result
 from maths.forms import ResultForm
@@ -58,6 +59,7 @@ def div(request, a, b):
         context=c
     ))
 
+@login_required
 def maths_list(request):
 
     SELECT_OP = {

@@ -23,5 +23,6 @@ urlpatterns = [
     path('maths/', include('maths.urls', namespace='maths')),
     path('', include('greetings.urls', namespace='greetings')),
     path('sessions/', include('sessions.urls')),
-    path('posts/', include('posts.urls', namespace='posts'))
+    path('posts/', include('posts.urls', namespace='posts')),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
