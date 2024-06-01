@@ -5,6 +5,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
+        fields = ['title','content','author','image', 'tags']
 
     def clean(self):
         cleaned_data = super().clean()

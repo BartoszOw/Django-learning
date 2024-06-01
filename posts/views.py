@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from posts.models import Post, Author
 from posts.forms import PostForm, AuthorForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -10,7 +11,7 @@ def posts_list(request):
     form = PostForm()
     posts = Post.objects.all()
     if request.method == "POST":
-        form = PostForm(data=request.POST)
+        form = PostForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request,'Dodano post')
@@ -33,6 +34,19 @@ def posts_details(request, id):
         template_name='post_details.html',
         context={'post': post}
     )
+
+@login_required
+def posts_editing(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Edytowano post!")
+            return redirect('posts:list')
+    else:
+        form = PostForm(instance=post)        
+    return render(request,'post_editing.html', {'post': post, 'form': form})
 
 def author_list(request):
     

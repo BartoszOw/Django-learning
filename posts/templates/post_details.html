@@ -21,27 +21,15 @@
     <div class="row">
         <div class="col-md-8">
             <table class="table table-striped">
-                <tr>
-                    <th>Title</th>
-                    <td>{{ post.title }}</td>
-                </tr>
-                <tr>
-                    <th>Content</th>
-                    <td>{{ post.content|truncatewords_html:10 }}</td>
-                </tr>
-                <tr>
-                    <th>Author</th>
-                    <td>{{ post.author.nick }}</td>
-                </tr>
-                <tr>
-                    <th>Created</th>
-                    <td>{{ post.created }}</td>
-                </tr>
-                <tr>
-                    <th>Modified</th>
-                    <td>{{ post.modified }}</td>
-                </tr>
-            </table>
+                <h1>{{ post.title }}</h1>
+                <h2>{{ post.author.nick }} | {{ post.created }}</h2>
+                <p>
+                   {{ post.content|truncatewords_html:10 }}
+                </p>
+                {% if post.image.url is not None %}
+                    <div><img src="{{ post.image.url }}" width="400px" height="200px"></div>
+                {% else %}
+                {% endif %}
             <a href="{% url 'posts:list' %}" class="btn btn-secondary">Back</a>
         </div>
     </div>

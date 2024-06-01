@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block title %}Posts editing{% endblock %}
+{% load bootstrap4 %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item " >
+        <a href="{% url 'greetings:welcome'%}">Home</a>
+    </li>
+    <li class="breadcrumb-item " >
+        <a href="{% url 'posts:list'%}">Posts</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Editing
+    </li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<h3>Edit Post</h3>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="Save Changes">
+</form>
+{% endblock %}
