@@ -23,7 +23,7 @@ def posts_list(request):
     
     return render(
         request=request,
-        template_name='post_list.html',
+        template_name='post_page.html',
         context={'posts': posts, 'form': form}
     )
 

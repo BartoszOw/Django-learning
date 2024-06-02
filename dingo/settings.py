@@ -36,18 +36,38 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'books',
     'maths',
     'greetings',
     'posts',
     'bootstrap4',
     'crispy_forms',
 ]
+
+ADMIN_INTERFACE_CONFIG = {
+    'EXCLUDE_APPS': ['auth', 'sites'], 
+    'LIST_FILTERS': ['is_staff', 'is_superuser'], 
+    'SEARCH_FIELDS': ['username', 'email'], 
+    'SHOW_ICONS': True, 
+    'MENU': [
+        {'label': 'Main', 'apps': ['auth', 'sites']},
+        {'label': 'Content', 'icon': 'content.svg', 'models': [
+            {'model': 'appname.modelname', 'label': 'Custom Name'},
+            {'model': 'appname.modelname'},
+        ]},
+        {'label': 'Custom Content', 'permissions': ['auth.add_user'], 'models': [
+            {'label': 'Add user', 'url': 'admin:auth_user_add'}
+        ]},
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

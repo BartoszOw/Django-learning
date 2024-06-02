@@ -1,0 +1,68 @@
+{% extends "main.html" %}
+
+{% block title %}{{book.title}}{% endblock %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumbs %}
+
+{% endblock %}
+
+{% block content %}
+<a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+<div class="row">
+    <div class="col-md-7">
+        <div class="table-responsive">
+            <h1>- {{ book.title }}</h1>
+            {% for tag in book.tags.all %}
+                <button type="button" class="btn btn-info">{{ tag.word }}</button>
+            {% endfor %}
+    
+    {% if book_already_borrowed %}
+        <p style="color: red;">This book is already borrowed.</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="borrow_form" class="btn btn-primary">Borrow</button>
+        </form>
+    {% endif %}
+    {% if borrows %}
+    <h4>Currently borrowed:</h4>
+        <ul>
+            {% for borrow in borrows %}
+                <li>{{ borrow.user.username }} - {{ borrow.borrow_date }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    {% endif %}
+
+    <p><strong>Author:</strong> <a href="{% url 'books:author_details' pk=book.author.pk %}">{{ book.author.name }}</a></p>
+    {% if book.image.url is not None %}
+    <p><strong>Image:</strong></p>
+        <div><img src="{{ book.image.url }}" width="400px" height="200px"></div>
+    {% else %}
+    {% endif %}
+    <p><strong>Description:</strong></p>
+    <p>{{ book.description }}</p>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row justify-content-center">
+          <div class="col-md-7">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form comment_form %}
+                <button type="submit" name="comment_form" class="btn btn-primary">Dodaj komentarz</button>
+              </form>
+        
+              <h2>Komentarze:</h2>
+            <ul>
+                {% for comment in book.comment_set.all %}
+                    <li><strong>{{ comment.author }}</strong>: {{ comment.content }}</li>
+                {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

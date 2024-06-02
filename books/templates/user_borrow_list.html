@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+{% block title %}Wypozyczenia{% endblock %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumbs %}
+
+{% endblock %}
+
+{% block content %}
+<h1>User Borrow List</h1>
+<div class="list-group">
+  {% for borrow in borrows %}
+  <div class="list-group-item">
+    <div class="d-flex justify-content-between">
+      <h5 class="mb-1">{{ borrow.book.title }}</h5>
+      <small>{{ borrow.borrow_date }}</small>
+    </div>
+    {% if not borrow.is_returned %}
+    <form method="POST" class="float-right">
+      {% csrf_token %}
+      <input type="hidden" name="borrow_id" value="{{ borrow.id }}">
+      <button class="btn btn-success btn-sm">Return</button>
+    </form>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

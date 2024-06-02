@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+
+{% block title %}{{author.surname}}{% endblock %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumbs %}
+
+{% endblock %}
+
+{% block content %}
+<a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+<div class="container">
+    <h1>{{ author.name }} {{author.surname}}</h1>
+    <p><strong>Biography:</strong></p>
+    <p>{{ author.author_bio }}</p>
+    {% if author.book_set.exists %}
+    <h4>Books by {{ author.name }} {{ author.surname }}</h4>
+            <ul>
+                {% for book in author.book_set.all %}
+                    <li><a href="{% url 'books:book_details' pk=book.pk%}">{{ book.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No books found for this author.</p>
+        {% endif %}
+</div>
+
+{% endblock %}
