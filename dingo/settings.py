@@ -21,10 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3hans78i(hph_yfew@11tgj&h09@q290ri!n@n0%86lgl$0^8i'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'test_key')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = [
     'testserver',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'posts',
     'bootstrap4',
     'crispy_forms',
+    'rest_framework',
 ]
 
 ADMIN_INTERFACE_CONFIG = {
@@ -150,7 +152,10 @@ LOGOUT_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

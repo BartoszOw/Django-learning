@@ -18,16 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from dingo.api import router
 
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('maths/', include('maths.urls', namespace='maths')),
     path('', include('greetings.urls', namespace='greetings')),
     path('sessions/', include('sessions.urls')),
     path('posts/', include('posts.urls', namespace='posts')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('books/', include('books.urls', namespace='books'))
+    path('books/', include('books.urls', namespace='books')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
