@@ -25,12 +25,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'test_key')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', 'False')
 
 ALLOWED_HOSTS = [
     'testserver',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    '2769ec6c-893d-4f15-afac-5eddc5d50a3c-00-255rc6fdnsdvd.spock.replit.dev',
 ]
 
 
@@ -134,6 +135,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
+
+CSRF_TRUSTED_ORIGINS = ['https://2769ec6c-893d-4f15-afac-5eddc5d50a3c-00-255rc6fdnsdvd.spock.replit.dev']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 LANGUAGE_CODE = 'en-us'
 
